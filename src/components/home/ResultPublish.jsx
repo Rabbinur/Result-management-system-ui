@@ -58,12 +58,12 @@ const ResultPublish = () => {
             <>
               <div
                 className={`${(i + 1) % 2 == 1 ? " bg-[#DEF7E5]" : "bg-[#D8CDED]"
-                  }  px-8 py-4 rounded-lg max-w-[420px]`}
+                  }  px-4 py-4 rounded-lg max-w-[420px]`}
                 key={item.id}
               >
                 <h3
                   className={`${(i + 1) % 2 == 1 ? "text-[#00661D] " : "text-[#7E57C2]"
-                    } text-xl font-semibold`}
+                    } text-lg lg:text-xl font-semibold`}
                 >
                   {item.department}
                 </h3>
@@ -84,7 +84,7 @@ const ResultPublish = () => {
                               backgroundSize: "cover",
                               backgroundPosition: "center",
                             }}
-                            className={`w-[50px] h-[50px] relative rounded-full ${i == 1 && "left-[-15px]"
+                            className={`w-[30px] h-[30px] lg:w-[50px] lg:h-[50px] relative rounded-full ${i == 1 && "left-[-15px]"
                               } ${i == 2 && "left-[-30px]"} ${i == 3 && "left-[-45px]"
                               }
                             ${i == 4 && "left-[-60px]"}

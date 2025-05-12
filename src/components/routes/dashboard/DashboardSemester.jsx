@@ -1,252 +1,93 @@
-import { Link } from "react-router-dom";
+"use client"
+
+import { Book, Calendar, GraduationCap, School, Users } from "lucide-react"
+import { Link } from "react-router-dom"
+import departmentData from "../../../constant"
 
 const DashboardSemester = () => {
-  const departmentData = [
-    // Data for 2022
-    {
-      id: 1,
-      year: 2022,
-      yearSemester: "3rd Year and 5th Semester", // Added year and semester
-      department: "Computer Science",
-      subject: "Computer Networks",
-      totalStudents: 28,
-    },
-    {
-      id: 2,
-      year: 2022,
-      yearSemester: "2nd Year and 4th Semester", // Added year and semester
-      department: "Computer Science",
-      subject: "Data Structures",
-      totalStudents: 25,
-    },
-    {
-      id: 3,
-      year: 2022,
-      yearSemester: "1st Year and 1st Semester", // Added year and semester
-      department: "Mathematics",
-      subject: "Calculus",
-      totalStudents: 27,
-    },
-    {
-      id: 4,
-      year: 2022,
-      yearSemester: "1st Year and 2nd Semester", // Added year and semester
-      department: "Mathematics",
-      subject: "Linear Algebra",
-      totalStudents: 22,
-    },
-    {
-      id: 5,
-      year: 2022,
-      yearSemester: "2nd Year and 3rd Semester", // Added year and semester
-      department: "Physics",
-      subject: "Classical Mechanics",
-      totalStudents: 24,
-    },
-    {
-      id: 6,
-      year: 2022,
-      yearSemester: "3rd Year and 6th Semester", // Added year and semester
-      department: "Physics",
-      subject: "Quantum Physics",
-      totalStudents: 20,
-    },
+  // Extract semester name from yearSemester
+  const getSemester = (yearSemester) => {
+    const match = yearSemester.match(/(\d+)(st|nd|rd|th) Semester/)
+    return match ? match[0] : null
+  }
 
-    // Data for 2023
-    {
-      id: 7,
-      year: 2023,
-      yearSemester: "4th Year and 7th Semester", // Added year and semester
-      department: "Computer Science",
-      subject: "Algorithms",
-      totalStudents: 30,
-    },
-    {
-      id: 8,
-      year: 2023,
-      yearSemester: "4th Year and 8th Semester", // Added year and semester
-      department: "Computer Science",
-      subject: "Machine Learning",
-      totalStudents: 26,
-    },
-    {
-      id: 9,
-      year: 2023,
-      yearSemester: "2nd Year and 4th Semester", // Added year and semester
-      department: "Mathematics",
-      subject: "Statistics",
-      totalStudents: 28,
-    },
-    {
-      id: 10,
-      year: 2023,
-      yearSemester: "3rd Year and 5th Semester", // Added year and semester
-      department: "Mathematics",
-      subject: "Discrete Mathematics",
-      totalStudents: 27,
-    },
-    {
-      id: 11,
-      year: 2023,
-      yearSemester: "3rd Year and 6th Semester", // Added year and semester
-      department: "Physics",
-      subject: "Thermodynamics",
-      totalStudents: 23,
-    },
-    {
-      id: 12,
-      year: 2023,
-      yearSemester: "2nd Year and 3rd Semester", // Added year and semester
-      department: "Physics",
-      subject: "Electrodynamics",
-      totalStudents: 21,
-    },
-
-    // Data for 2024
-    {
-      id: 13,
-      year: 2024,
-      yearSemester: "4th Year and 7th Semester", // Added year and semester
-      department: "Computer Science",
-      subject: "Artificial Intelligence",
-      totalStudents: 29,
-    },
-    {
-      id: 14,
-      year: 2024,
-      yearSemester: "4th Year and 8th Semester", // Added year and semester
-      department: "Computer Science",
-      subject: "Cybersecurity",
-      totalStudents: 24,
-    },
-    {
-      id: 15,
-      year: 2024,
-      yearSemester: "2nd Year and 3rd Semester", // Added year and semester
-      department: "Computer Science",
-      subject: "Computer Architecture",
-      totalStudents: 30,
-    },
-    {
-      id: 16,
-      year: 2024,
-      yearSemester: "2nd Year and 4th Semester", // Added year and semester
-      department: "Mathematics",
-      subject: "Differential Equations",
-      totalStudents: 25,
-    },
-    {
-      id: 17,
-      year: 2024,
-      yearSemester: "3rd Year and 5th Semester", // Added year and semester
-      department: "Physics",
-      subject: "Optics",
-      totalStudents: 26,
-    },
-    {
-      id: 18,
-      year: 2024,
-      yearSemester: "3rd Year and 6th Semester", // Added year and semester
-      department: "Physics",
-      subject: "Nuclear Physics",
-      totalStudents: 22,
-    },
-  ];
+  // Get all unique semesters (e.g., "1st Semester", "2nd Semester")
+  const semesters = Array.from(new Set(departmentData.map((item) => getSemester(item.yearSemester)))).sort()
 
   return (
-    <>
-      <main className="m-10">
-        {/* 2024 */}
-        <section>
-          <h1 className="font-bold text-3xl">Year - 2024</h1>
-          <div className="flex mt-6 items-center flex-wrap gap-x-10 gap-y-5">
-            {departmentData.flatMap((item) =>
-              item.year === 2024 ? (
-                <>
-                  <Link to={`/dashboard/semester/${1}/result/${item.id}`}>
-                    <div
-                      className="bg-[#DEF7E5] rounded-lg p-5 w-[300px]"
-                      key={item.id}
-                    >
-                      <h3 className="text-xl font-medium">{item.subject}</h3>
-                      <p className="text-base">{item.yearSemester}</p>
-                      <p className="text-[#333333] text-sm">
-                        {item.department}
-                      </p>
-                      <p className="text-[#333333] text-sm">
-                        {item.totalStudents}
-                      </p>
-                    </div>
-                  </Link>
-                </>
-              ) : (
-                []
-              )
-            )}
-          </div>
-        </section>
+    <main className="min-h-screen bg-slate-50">
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
+        <header className="mb-10">
+          <h1 className="text-3xl font-bold tracking-tight mb-2 text-slate-800">Semester-wise Subjects</h1>
+          <p className="text-slate-500">Browse and manage subjects by semester</p>
+        </header>
 
-        {/* 2023 */}
-        <section className="mt-10">
-          <h1 className="font-bold text-3xl">Year - 2023</h1>
-          <div className="flex mt-6 items-center flex-wrap gap-x-10 gap-y-5">
-            {departmentData.flatMap((item) =>
-              item.year === 2023 ? (
-                <>
-                  <Link to={`/dashboard/semester/${1}/result/${item.id}`}>
-                    <div
-                      className="bg-[#D8CDED] rounded-lg p-5 w-[300px]"
-                      key={item.id}
-                    >
-                      <h3 className="text-xl font-medium">{item.subject}</h3>
-                      <p className="text-base">{item.yearSemester}</p>
-                      <p className="text-[#333333] text-sm">
-                        {item.department}
-                      </p>
-                      <p className="text-[#333333] text-sm">
-                        {item.totalStudents}
-                      </p>
-                    </div>
-                  </Link>
-                </>
-              ) : (
-                []
-              )
-            )}
-          </div>
-        </section>
-        {/* 2022 */}
-        <section className="mt-10">
-          <h1 className="font-bold text-3xl">Year - 2022</h1>
-          <div className="flex mt-6 items-center flex-wrap gap-x-10 gap-y-5">
-            {departmentData.flatMap((item) =>
-              item.year === 2022 ? (
-                <>
-                  <Link to={`/dashboard/semester/${1}/result/${item.id}`}>
-                    <div
-                      className="bg-[#DEF7E5] rounded-lg p-5 w-[300px]"
-                      key={item.id}
-                    >
-                      <h3 className="text-xl font-medium">{item.subject}</h3>
-                      <p className="text-base">{item.yearSemester}</p>
-                      <p className="text-[#333333] text-sm">
-                        {item.department}
-                      </p>
-                      <p className="text-[#333333] text-sm">
-                        {item.totalStudents}
-                      </p>
-                    </div>
-                  </Link>
-                </>
-              ) : (
-                []
-              )
-            )}
-          </div>
-        </section>
-      </main>
-    </>
-  );
-};
+        <div className="space-y-12">
+          {semesters.map((semester) => {
+            const filteredData = departmentData.filter((item) => getSemester(item.yearSemester) === semester)
 
-export default DashboardSemester;
+            return (
+              <section key={semester} className="relative">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="p-1.5 rounded-lg bg-white shadow-sm">
+                    <Calendar className="h-5 w-5 text-teal-600" />
+                  </div>
+                  <h2 className="text-2xl font-semibold text-slate-800">{semester}</h2>
+                  <span className="ml-2 rounded-full bg-teal-100 px-2.5 py-0.5 text-xs font-medium text-teal-700">
+                    {filteredData.length} subjects
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                  {filteredData.map((item) => (
+                    <Link
+                      key={item.id}
+                      to={`/dashboard/semester/${1}/result/${item.id}`}
+                      className="group relative overflow-hidden rounded-xl bg-white text-slate-800 shadow-sm border border-slate-200 hover:shadow-md transition-all duration-200 flex flex-col h-full"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-teal-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                      <div className="p-5 flex flex-col h-full relative z-10">
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="rounded-full bg-blue-100 p-2">
+                            <Book className="h-4 w-4 text-blue-600" />
+                          </div>
+                          <span className="text-xs font-medium text-slate-500">{item.year}</span>
+                        </div>
+
+                        <h3 className="text-lg font-bold mb-2 group-hover:text-blue-700 transition-colors duration-200">
+                          {item.subject}
+                        </h3>
+
+                        <div className="space-y-2 mt-auto">
+                          <div className="flex items-center text-sm text-slate-600">
+                            <School className="h-3.5 w-3.5 mr-2 flex-shrink-0 text-teal-600" />
+                            <span className="truncate">{item.department}</span>
+                          </div>
+
+                          <div className="flex items-center text-sm text-slate-600">
+                            <Users className="h-3.5 w-3.5 mr-2 flex-shrink-0 text-teal-600" />
+                            <span>{item.totalStudents} Students</span>
+                          </div>
+
+                          <div className="flex items-center text-sm text-slate-600">
+                            <GraduationCap className="h-3.5 w-3.5 mr-2 flex-shrink-0 text-teal-600" />
+                            <span>{item.yearSemester}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="h-1.5 w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )
+          })}
+        </div>
+      </div>
+    </main>
+  )
+}
+
+export default DashboardSemester

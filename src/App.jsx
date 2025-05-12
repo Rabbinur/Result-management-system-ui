@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <main className=" mb-8">
-        <div className=" border py-4 px-10 sticky top-0 bg-white  shadow-xl ">
+        <div className=" border py-4 px-10 sticky top-0 bg-white z-[99999] shadow-xl ">
           <Navbar />
         </div>
 
